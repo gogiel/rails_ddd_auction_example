@@ -21,10 +21,12 @@ class AuctionsController < ApplicationController
 
   # POST /auctions
   def create
-    @auction = Auction.new(auction_params)
+    auction_id = Bidding::Commands::CreateAuction.call(
+      **auction_params.to_h.symbolize_keys
+    )
 
-    if @auction.save
-      redirect_to @auction, notice: "Auction was successfully created."
+    if auction_id
+      redirect_to auction_path(auction_id), notice: "Auction was successfully created."
     else
       render :new, status: :unprocessable_entity
     end

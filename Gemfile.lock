@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/gogiel/entity_mapper.git
+  revision: 6cff0d4c82005a20545bba796566c7087035a060
+  specs:
+    entity_mapper (0.0.1.pre.alpha)
+      zeitwerk (~> 2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -200,6 +207,7 @@ PLATFORMS
 
 DEPENDENCIES
   debug
+  entity_mapper!
   puma (>= 5.0)
   rails (~> 7.1.1)
   sprockets-rails

@@ -28,3 +28,4 @@ group :development do
 
 end
 
+gem 'entity_mapper', github: 'gogiel/entity_mapper'
