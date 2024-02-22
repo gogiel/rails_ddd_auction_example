@@ -6,10 +6,13 @@ module Bidding
       def initialize(starting_price:, ends_at:)
         @starting_price = starting_price
         @ends_at = ends_at
-        @bids_history = []
       end
 
-      attr_accessor :starting_price, :ends_at, :bids_history
+      def bids_history
+        @bids_history ||= []
+      end
+
+      attr_accessor :starting_price, :ends_at
 
       def place_bid(bidder_id:, amount:)
         raise BiddingError, "Auction is over" if Time.now > ends_at
@@ -18,7 +21,7 @@ module Bidding
 
         validate_bid!(bid)
 
-        @bids_history << bid
+        bids_history << bid
       end
 
       def validate_bid!(bid)
@@ -34,7 +37,7 @@ module Bidding
       end
 
       def highest_bid_amount
-        @bids_history.map(&:amount).max
+        bids_history.map(&:amount).max
       end
     end
   end
