@@ -1,12 +1,47 @@
 <div id="<%= dom_id auction %>">
+  <% is_over = auction.ends_at.past? %>
   <p>
     <strong>Starting price:</strong>
     <%= auction.starting_price %>
   </p>
 
   <p>
-    <strong>Ends at:</strong>
+    <strong><%= is_over ? 'Finished at' : 'Ends at' %>:</strong>
     <%= auction.ends_at %>
   </p>
 
+  <div>
+    <% if auction.bids.any? %>
+    <p>Bids</p>
+
+    <ul>
+      <% auction.bids.each do |bid| %>
+        <li>
+          <%= bid.bid %> by <%= bid.bidder_id %>
+        </li>
+      <% end %>
+    </ul>
+      <% else %>
+        <p>No bids yet</p>
+      <% end %>
+  </div>
+
+  <%unless is_over %>
+  <%= form_tag place_bid_auction_path(auction), method: :post do %>
+    <div>
+      <%= label_tag :amount, "Amount" %>
+      <%= text_field_tag :amount %>
+    </div>
+
+    <div>
+      <%= label_tag :bidder_id, "Bidder ID" %>
+      <%= text_field_tag :bidder_id %>
+    </div>
+
+    <div>
+      <%= submit_tag "Place bid" %>
+    </div>
+  <% end %>
+  <% end %>
+<hr />
 </div>

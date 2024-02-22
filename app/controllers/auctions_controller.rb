@@ -3,7 +3,7 @@ class AuctionsController < ApplicationController
 
   # GET /auctions
   def index
-    @auctions = Auction.all
+    @auctions = Auction.includes(:bids).all
   end
 
   # GET /auctions/1
@@ -30,6 +30,16 @@ class AuctionsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def place_bid
+    Bidding::Commands::PlaceBid.call(
+      auction_id: params.fetch(:id), bidder_id: params.fetch(:bidder_id), amount: params.fetch(:amount).to_i
+    )
+
+    redirect_to auction_path(params[:id]), notice: "Bid was successfully placed."
+  rescue Bidding::Model::Auction::BiddingError => e
+    redirect_to auction_path(params[:id]), alert: e.message
   end
 
   # PATCH/PUT /auctions/1
