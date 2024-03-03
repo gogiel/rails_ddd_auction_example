@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "dashboard#index"
+
+  resource :session, only: %i[create destroy]
 end
