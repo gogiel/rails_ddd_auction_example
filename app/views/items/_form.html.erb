@@ -1,0 +1,31 @@
+<%= form_with(model: item) do |form| %>
+  <% if item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :name, placeholder: 'Name', class: 'input input-bordered w-full max-w-xs' %>
+
+  <div class="form-control">
+    <label class="label cursor-pointer">
+      <span class="label-text">Locked</span>
+      <%= form.check_box :locked, class: 'checkbox checkbox-primary' %>
+    </label>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.rich_text_area :content %>
+  </div>
+
+  <div>
+    <%= form.submit class: 'btn' %>
+  </div>
+<% end %>

@@ -1,6 +1,9 @@
+@import './actiontext.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind typography;
 
 .dropdown-button-form {
     display: flex;
@@ -10,4 +13,3 @@
     display: flex;
     flex: 1;
 }
-@import 'actiontext.css';
