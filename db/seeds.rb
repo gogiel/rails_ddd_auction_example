@@ -7,6 +7,10 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-5.times do |i|
-  User.create!(name: "User #{i + 1}")
+3.times do |i|
+  User.create!(name: "Normal User #{i + 1}")
+end
+
+2.times do |i|
+  User.create!(name: "Admin User #{i + 1}")
 end
